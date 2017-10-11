@@ -13,6 +13,7 @@ import './task.js';
 
 Template.body.onCreated(function bodyOnCreated () {
   this.state = new ReactiveDict();
+  Meteor.subscribe('tasks ');
 });
 
 Template.body.helpers({
@@ -44,7 +45,7 @@ Template.body.events({
       owner: Meteor.userId(),
       username: Meteor.user().username,
     });
-
+    Meteor.call('tasks.insert',text);
     target.text.value = '';
     'change .hide-completed input' (event, instance)
     {
